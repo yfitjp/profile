@@ -17,9 +17,13 @@
       background-size: cover; /* 画像の縦横比を保ちながら要素を覆う */
       background-position: center; /* 画像を中央に配置 */
       color: #fff;
-      padding: 10px 10px; /* 上下のパディングを増やして画像を表示 */
+      padding: 20px; /* 左右のパディングを減らす */
       text-align: center;
       position: relative; /* テキストやナビゲーションを画像の上に配置 */
+      min-height: 200px; /* 画像が切れないように最小の高さを設定 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* コンテンツを中央に配置 */
     }
     header h1 {
       margin: 0;
