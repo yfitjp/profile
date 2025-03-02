@@ -78,6 +78,8 @@
     nav {
       background-color: rgba(13, 71, 161, 0.9);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative; /* 追加 */
+      z-index: 10; /* 追加：他の要素より前面に表示 */
     }
     
     nav ul {
@@ -102,6 +104,8 @@
       display: block;
       transition: color 0.3s;
       font-size: 1.1rem;
+      position: relative; /* 追加 */
+      z-index: 11; /* 追加：リンクを最前面に */
     }
     
     nav ul li a:hover {
