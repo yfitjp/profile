@@ -1,516 +1,845 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="YFIT_icon.png" type="image/png">
-  <title>YFIT Japan - 会社プロフィール</title>
-  <style>
-    /* 基本スタイル */
-    :root {
-      --primary-blue: #1a73e8;
-      --secondary-blue: #4285f4;
-      --light-blue: #e8f0fe;
-      --dark-blue: #0d47a1;
-      --accent-color: #34a853;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f8f9fa;
-      line-height: 1.6;
-      color: #333;
-    }
-    
-    /* ヘッダースタイル */
-    header {
-      background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
-      background-size: cover;
-      background-position: center;
-      color: #fff;
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .header-content {
-      position: relative;
-      z-index: 2;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('YFIT_header.png');
-      background-size: cover;
-      opacity: 0.2;
-      z-index: 1;
-    }
-    
-    header h1 {
-      margin: 0;
-      font-size: 3rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      letter-spacing: 1px;
-      animation: fadeInDown 1s ease-out;
-    }
-    
-    .tagline {
-      font-size: 1.2rem;
-      margin-top: 10px;
-      opacity: 0;
-      animation: fadeIn 1s ease-out 0.5s forwards;
-    }
-    
-    /* ナビゲーション */
-    nav {
-      background-color: rgba(13, 71, 161, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      position: relative; /* 追加 */
-      z-index: 10; /* 追加：他の要素より前面に表示 */
-    }
-    
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      padding: 15px 0;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    nav ul li {
-      margin: 0 20px;
-      position: relative;
-    }
-    
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 10px 5px;
-      display: block;
-      transition: color 0.3s;
-      font-size: 1.1rem;
-      position: relative; /* 追加 */
-      z-index: 11; /* 追加：リンクを最前面に */
-    }
-    
-    nav ul li a:hover {
-      color: var(--light-blue);
-    }
-    
-    nav ul li::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--light-blue);
-      transition: width 0.3s;
-    }
-    
-    nav ul li:hover::after {
-      width: 100%;
-    }
-    
-    /* メインコンテンツ */
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 30px;
-      background-color: #fff;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 1s ease-out 0.2s forwards;
-    }
-    
-    .section {
-      margin-bottom: 40px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid #eaeaea;
-    }
-    
-    .section:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-    
-    h2 {
-      color: var(--primary-blue);
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      position: relative;
-      padding-bottom: 12px;
-    }
-    
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background-color: var(--primary-blue);
-    }
-    
-    h3 {
-      color: var(--dark-blue);
-      font-size: 1.5rem;
-      margin: 25px 0 15px;
-    }
-    
-    p {
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-    
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    
-    .info-list li {
-      padding: 10px 0;
-      border-bottom: 1px dashed #e0e0e0;
-      display: flex;
-      align-items: center;
-    }
-    
-    .info-list li::before {
-      content: '•';
-      color: var(--primary-blue);
-      font-weight: bold;
-      margin-right: 10px;
-      font-size: 1.2em;
-    }
-    
-    /* カード */
-    .card-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-    
-    .card {
-      flex: 0 0 48%;
-      background-color: var(--light-blue);
-      border-radius: 8px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    .card h3 {
-      margin-top: 0;
-      color: var(--dark-blue);
-    }
-    
-    /* ロゴコンテナ */
-    .logo-container {
-      text-align: center;
-      margin: 30px 0;
-      padding: 20px;
-      background-color: rgba(232, 240, 254, 0.5);
-      border-radius: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .logo-container img {
-      max-width: 50%;
-      height: auto;
-      transition: transform 0.5s;
-    }
-    
-    .logo-container:hover img {
-      transform: scale(1.05);
-    }
-    
-    /* フッタースタイル */
-    footer {
-      background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
-      color: #fff;
-      text-align: center;
-      padding: 25px 20px;
-      position: relative;
-    }
-    
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--primary-blue), var(--accent-color), var(--secondary-blue));
-    }
-    
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    
-    .footer-info {
-      text-align: left;
-      flex: 1;
-      min-width: 200px;
-      margin-bottom: 15px;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 15px;
-    }
-    
-    .social-link {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.3s;
-    }
-    
-    .social-link:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-    
-    .copyright {
-      margin-top: 20px;
-      width: 100%;
-      font-size: 0.9rem;
-      opacity: 0.7;
-    }
-    
-    /* アニメーション */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    /* レスポンシブデザイン */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
-      
-      nav ul {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      nav ul li {
-        margin: 5px 0;
-      }
-      
-      .card {
-        flex: 0 0 100%;
-      }
-      
-      .container {
-        padding: 20px;
-      }
-      
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .footer-info {
-        text-align: center;
-      }
-      
-      .social-links {
-        justify-content: center;
-        margin-top: 15px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YFIT Japan - Your Future Internet Technology from Japan</title>
+    <style>
+        :root {
+            --primary-dark: #1a2a4a;
+            --primary: #2c3e5d;
+            --primary-light: #3d537a;
+            --accent: #d4af37;
+            --text-light: #f5f5f5;
+            --text-dark: #333;
+            --section-padding: 5rem 2rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: var(--primary-dark);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header.scrolled {
+            background-color: rgba(26, 42, 74, 0.95);
+            padding: 0.5rem 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            height: 48px;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .logo {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* ヒーローセクション */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--primary-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: #c4a536;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        /* サービスセクション */
+        .services {
+            padding: var(--section-padding);
+            background-color: #fff;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover:before {
+            width: 100%;
+            opacity: 0.05;
+            z-index: -1;
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        /* 会社概要セクション */
+        .about {
+            padding: var(--section-padding);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+            color: var(--text-light);
+        }
+        
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .about-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .about h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .company-info {
+            margin-top: 2rem;
+        }
+        
+        .company-info p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .company-info strong {
+            min-width: 120px;
+            display: inline-block;
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        
+        /* お問い合わせセクション */
+        .contact {
+            padding: var(--section-padding);
+            background-color: #fff;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .contact-form {
+            padding: 3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(45, 62, 93, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-button {
+            background-color: var(--primary);
+            color: var(--text-light);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .submit-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* フッター */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* アニメーション */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-30px) translateX(15px);
+            }
+            50% {
+                transform: translateY(-10px) translateX(30px);
+            }
+            75% {
+                transform: translateY(-25px) translateX(5px);
+            }
+        }
+        
+        /* レスポンシブデザイン */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+                z-index: 2;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 100%;
+                background-color: var(--primary-dark);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(100%);
+                transition: transform 0.5s ease;
+                z-index: 1;
+            }
+            
+            nav.active {
+                transform: translateX(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+            
+            nav ul li a {
+                font-size: 1.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .header-container {
+                padding: 1rem 5%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-  <div class="header-content">
-    <h1>YFIT Japan</h1>
-    <p class="tagline">Your Future Information Technology from Japan</p>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="index.html">会社概要</a></li>
-      <li><a href="service.html">サービス</a></li>
-      <li><a href="contact.html">お問い合わせ</a></li>
-    </ul>
-  </nav>
-</header>
-  
-  <div class="container">
-    <section id="company-profile" class="section">
-      <h2>会社プロフィール</h2>
-      <p>
-        YFIT Japan(Your Future Information Technology from Japan)は、最新技術を駆使し、お客様に最高のサービスを提供することを目指しています。革新と品質を重視し、業界内でのリーダーシップを確立するために日々努力しています。
-      </p>
-      
-      <div class="logo-container">
-        <img src="YFIT_logo.png" alt="YFIT Japan ロゴ" id="logo">
-      </div>
-      
-      <h3>基本情報</h3>
-      <ul class="info-list">
-        <li>社名：YFIT Japan</li>
-        <li>設立：2025年</li>
-        <li>所在地：千葉県</li>
-      </ul>
-      
-      <div class="card-container">
-        <div class="card" id="mission-card">
-          <h3>ミッション</h3>
-          <p>
-            お客様と共に未来を創造し、持続可能な社会に貢献することを使命としています。革新的な技術ソリューションを通じて、人々の生活と社会の発展に貢献します。
-          </p>
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="YFIT_logo.png" alt="YFIT Japan Logo" class="logo">
+            </div>
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">ホーム</a></li>
+                    <li><a href="#services">サービス</a></li>
+                    <li><a href="#about">会社概要</a></li>
+                    <li><a href="#contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- ヒーローセクション -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Your Future Internet Technology</h1>
+            <p>未来を創造するテクノロジーを、日本から世界へ。最先端のAIとアプリケーション開発で、あなたのビジネスを次のレベルへ導きます。</p>
+            <a href="#contact" class="cta-button">お問い合わせ</a>
+        </div>
+        <div class="hero-bg">
+            <!-- 動的な背景パーティクル（JavaScript で生成） -->
+        </div>
+    </section>
+    
+    <!-- サービスセクション -->
+    <section id="services" class="services">
+        <div class="section-title">
+            <h2>サービス</h2>
+            <p>最先端のテクノロジーでビジネスの課題を解決します</p>
         </div>
         
-        <div class="card" id="vision-card">
-          <h3>ビジョン</h3>
-          <p>
-            革新的なソリューションを提供し、業界の未来をリードする企業を目指します。常に先進的な技術を追求し、お客様のビジネス成長に貢献するパートナーであり続けます。
-          </p>
+        <div class="services-container">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>モバイルアプリ開発</h3>
+                <p>洗練されたUIと高度な機能を備えた、使いやすいモバイルアプリケーションを開発します。iOS、Androidの両プラットフォームに対応しています。</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AIソリューション</h3>
+                <p>最新の人工知能技術を活用し、データ分析、予測モデル、自然言語処理などのソリューションを提供します。ビジネスの意思決定を強力にサポートします。</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>ウェブアプリケーション開発</h3>
+                <p>ユーザーフレンドリーかつセキュアなウェブアプリケーションを開発します。最新のテクノロジーとベストプラクティスを採用し、高いパフォーマンスを実現します。</p>
+            </div>
         </div>
-      </div>
     </section>
-  </div>
-  
-  <footer>
-    <div class="footer-content">
-      <div class="footer-info">
-        <h3>YFIT Japan</h3>
-        <p>千葉県にて最高の技術サービスを提供</p>
-      </div>
-      
-      <div class="social-links">
-        <a href="#" class="social-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-          </svg>
-        </a>
-        <a href="#" class="social-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-          </svg>
-        </a>
-        <a href="#" class="social-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-            <rect x="2" y="9" width="4" height="12"></rect>
-            <circle cx="4" cy="4" r="2"></circle>
-          </svg>
-        </a>
-      </div>
-    </div>
-    <div class="copyright">
-      <p>&copy; 2025 YFIT Japan. All Rights Reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // カードに対するアニメーション効果
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-      this.style.backgroundColor = '#d0e1fd';
-    });
-    card.addEventListener('mouseleave', function() {
-      this.style.backgroundColor = '#e8f0fe';
-    });
-  });
-  
-  // スクロールアニメーション
-  const scrollElements = document.querySelectorAll('.section, .card');
-  
-  function isElementInView(el) {
-    const rect = el.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    );
-  }
-  
-  function displayScrollElement(element) {
-    element.classList.add('scrolled');
-    element.style.opacity = 1;
-    element.style.transform = 'translateY(0)';
-  }
-  
-  // 全ての要素を最初から表示
-  scrollElements.forEach(el => {
-    el.style.opacity = 1;
-    el.style.transform = 'translateY(0)';
-    el.style.transition = 'all 0.6s ease-out';
-  });
-  
-  // ロゴのアニメーション
-  const logo = document.getElementById('logo');
-  if (logo) {
-    setInterval(() => {
-      logo.style.transform = 'scale(1.05)';
-      setTimeout(() => {
-        logo.style.transform = 'scale(1)';
-      }, 1000);
-    }, 3000);
-  }
-});
-  </script>
+    
+    <!-- 会社概要セクション -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <div class="about-content">
+                <div class="about-card">
+                    <h2>会社概要</h2>
+                    <p>YFIT Japanは、最先端のインターネットテクノロジーを活用したソリューションを提供する企業です。私たちは、革新的なアプリケーションとAIツールの開発を通じて、お客様のビジネスの成長と発展をサポートします。</p>
+                    
+                    <div class="company-info">
+                        <p><strong>会社名</strong> YFIT Japan</p>
+                        <p><strong>設立</strong> 2025年3月</p>
+                        <p><strong>資本金</strong> 100万円</p>
+                        <p><strong>代表者</strong> Yusei F</p>
+                        <p><strong>所在地</strong> 千葉県船橋市</p>
+                        <p><strong>事業内容</strong> アプリケーション開発、AIソリューション提供、ウェブサービス開発</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-image">
+                <img src="/api/placeholder/400/320" alt="YFIT Japanオフィス" style="max-width: 100%; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.3);">
+            </div>
+        </div>
+    </section>
+    
+    <!-- お問い合わせセクション -->
+    <section id="contact" class="contact">
+        <div class="section-title">
+            <h2>お問い合わせ</h2>
+            <p>サービスについてのご質問やお見積もりのご依頼は、下記フォームからお気軽にお問い合わせください</p>
+        </div>
+        
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">お名前</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">会社名</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">電話番号</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">お問い合わせ内容</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button">送信する</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- フッター -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>YFIT Japan</h3>
+                <p>未来を創造するテクノロジーを、日本から世界へ。</p>
+                <p>〒273-XXXX<br>千葉県船橋市</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>サービス</h3>
+                <ul>
+                    <li><a href="#services">モバイルアプリ開発</a></li>
+                    <li><a href="#services">AIソリューション</a></li>
+                    <li><a href="#services">ウェブアプリケーション開発</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>会社情報</h3>
+                <ul>
+                    <li><a href="#about">会社概要</a></li>
+                    <li><a href="#mission">ミッション</a></li>
+                    <li><a href="#team">チーム</a></li>
+                    <li><a href="#recruit">採用情報</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>お問い合わせ</h3>
+                <ul>
+                    <li><a href="#contact">お問い合わせフォーム</a></li>
+                    <li><a href="tel:+81-xx-xxxx-xxxx">TEL: xx-xxxx-xxxx</a></li>
+                    <li><a href="mailto:info@yfitjapan.com">info@yfitjapan.com</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 YFIT Japan. All rights reserved.
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // ヘッダースクロール効果
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // ハンバーガーメニュー
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+            
+            hamburger.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+            
+            // スムーススクロール
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    nav.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // パーティクルアニメーション
+            const heroBg = document.querySelector('.hero-bg');
+            
+            for (let i = 0; i < 80; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('hero-particle');
+                
+                // ランダムなサイズとポジション
+                const size = Math.random() * 5 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                // ランダムな位置
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // ランダムなアニメーション遅延
+                particle.style.animationDelay = `${Math.random() * 8}s`;
+                particle.style.animationDuration = `${Math.random() * 12 + 8}s`;
+                
+                heroBg.appendChild(particle);
+            }
+            
+            // コンタクトフォーム送信（実際のバックエンドがない場合はアラート）
+            const contactForm = document.querySelector('.contact-form');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('お問い合わせありがとうございます。現在デモ版のため送信されませんが、実際のサイトでは正常に送信されます。');
+            });
+            
+            // 要素が画面内に入ったときのアニメーション
+            const observerOptions = {
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.service-card, .about-card, .contact-container, .section-title').forEach(el => {
+                el.classList.add('fade-in');
+                observer.observe(el);
+            });
+        });
+    </script>
+    
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 </html>
