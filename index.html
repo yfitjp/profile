@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="YFIT_icon.png" type="image/png">
-    <title>YFIT Japan</title>
+    <title>YFIT Japan - Your Future Internet Technology from Japan</title>
     <style>
         :root {
-            --primary-dark: #1a2a4a;
-            --primary: #2c3e5d;
-            --primary-light: #3d537a;
-            --accent: #d4af37;
+            --primary-dark: #111111;
+            --primary: #222222;
+            --primary-light: #2c2c2c;
+            --accent: #e63946;
+            --accent-dark: #c81d2a;
             --text-light: #f5f5f5;
             --text-dark: #333;
             --section-padding: 5rem 2rem;
@@ -36,11 +36,11 @@
             width: 100%;
             z-index: 1000;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         
         header.scrolled {
-            background-color: rgba(26, 42, 74, 0.95);
+            background-color: rgba(17, 17, 17, 0.95);
             padding: 0.5rem 0;
         }
         
@@ -149,7 +149,7 @@
         .cta-button {
             display: inline-block;
             background-color: var(--accent);
-            color: var(--primary-dark);
+            color: white;
             padding: 0.8rem 2rem;
             border-radius: 30px;
             text-decoration: none;
@@ -158,13 +158,13 @@
             transition: all 0.3s ease;
             animation: fadeInUp 1s ease 0.4s forwards;
             opacity: 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(230,57,70,0.3);
         }
         
         .cta-button:hover {
-            background-color: #c4a536;
+            background-color: var(--accent-dark);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            box-shadow: 0 6px 20px rgba(230,57,70,0.4);
         }
         
         .hero-bg {
@@ -245,7 +245,7 @@
             left: 0;
             width: 5px;
             height: 100%;
-            background: var(--primary);
+            background: var(--accent);
             transition: all 0.3s ease;
         }
         
@@ -257,7 +257,7 @@
         
         .service-icon {
             font-size: 2.5rem;
-            color: var(--primary);
+            color: var(--accent);
             margin-bottom: 1.5rem;
         }
         
@@ -270,7 +270,7 @@
         /* 会社概要セクション */
         .about {
             padding: var(--section-padding);
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
             color: var(--text-light);
         }
         
@@ -297,11 +297,12 @@
         }
         
         .about-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-left: 3px solid var(--accent);
         }
         
         .about h2 {
@@ -341,7 +342,7 @@
         /* お問い合わせセクション */
         .contact {
             padding: var(--section-padding);
-            background-color: #fff;
+            background-color: #f8f8f8;
         }
         
         .contact-container {
@@ -351,6 +352,7 @@
             border-radius: 10px;
             box-shadow: 0 15px 50px rgba(0,0,0,0.1);
             overflow: hidden;
+            border-top: 4px solid var(--accent);
         }
         
         .contact-form {
@@ -381,8 +383,8 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(45, 62, 93, 0.2);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(230,57,70,0.1);
         }
         
         .form-group textarea {
@@ -391,8 +393,8 @@
         }
         
         .submit-button {
-            background-color: var(--primary);
-            color: var(--text-light);
+            background-color: var(--accent);
+            color: white;
             border: none;
             padding: 0.8rem 2rem;
             font-size: 1rem;
@@ -404,7 +406,7 @@
         }
         
         .submit-button:hover {
-            background-color: var(--primary-dark);
+            background-color: var(--accent-dark);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
@@ -666,7 +668,7 @@
             </div>
             
             <div class="about-image">
-                <img src="/api/placeholder/400/320" alt="YFIT Japanオフィス" style="max-width: 100%; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.3);">
+                <img src="YFIT_logo.png" alt="YFIT Japanオフィス" style="max-width: 100%; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.3);">
             </div>
         </div>
     </section>
