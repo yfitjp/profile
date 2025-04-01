@@ -268,6 +268,20 @@
             color: var(--primary-dark);
         }
         
+        .service-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .service-link:hover {
+            color: var(--accent-dark);
+            transform: translateX(5px);
+        }
+        
         /* 会社概要セクション */
         .about {
             padding: var(--section-padding);
@@ -578,6 +592,33 @@
                 padding: 2rem;
             }
         }
+        
+        .footer-column .social-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .footer-column .social-link i {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .footer-column .social-link span {
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -627,8 +668,9 @@
                 <div class="service-icon">
                     <i class="fas fa-mobile-alt"></i>
                 </div>
-                <h3>モバイルアプリ開発</h3>
-                <p>洗練されたUIと高度な機能を備えた、使いやすいモバイルアプリケーションを開発します。iOS、Androidの両プラットフォームに対応しています。</p>
+                <h3>ToreMock(トレモック)</h3>
+                <p>英語学習者のためのオンライン模試プラットフォーム。TOEIC、TOEFL、英検などの主要な英語試験の模試を提供し、スコア向上をサポートします。</p>
+                <a href="https://toremock.com" class="service-link" target="_blank">toremock.com</a>
             </div>
             
             <div class="service-card">
@@ -720,7 +762,10 @@
                 <h3>YFIT Japan</h3>
                 <p>未来を創造するテクノロジーを、日本から世界へ。</p>
                 <p>〒274-0077<br>千葉県船橋市薬園台6-8-2</p>
-                <li><a href="https://www.instagram.com/yfit.jp/">弊社インスタグラム</a></li>                
+                <a href="https://www.instagram.com/yfit.jp/" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>@yfit.jp</span>
+                </a>
             </div>
             
             <div class="footer-column">
